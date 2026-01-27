@@ -79,7 +79,7 @@
 
 ## INSTALL THE SYSTEM!
 
-    pacstrap -K /mnt base btrfs-progs amd-ucode sudo nano linux-zen linux-lts linux-firmare scx-scheds wireless-regdb dracut binutils elfutils networkmanager squashfs-tools systemd-ukify tpm2-tools sbsigntools cryptsetup rng-tools qrencode multipath-tools jq nvme-cli dbus-broker dbus bluez gnupg openssh plymouth tuned-ppd wireless_tools systemtap firewalld 
+    pacstrap -K /mnt base btrfs-progs amd-ucode sudo nano linux-zen linux-lts linux-firmare scx-scheds wireless-regdb dracut binutils elfutils networkmanager squashfs-tools systemd-ukify tpm2-tools sbsigntools cryptsetup rng-tools qrencode jq nvme-cli dbus-broker dbus bluez openssh plymouth tuned-ppd wireless_tools systemtap firewalld 
 <br>
 
 ### Gen Fstab!
