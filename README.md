@@ -106,7 +106,7 @@
     nano /etc/dracut.conf.d/cmdline.conf
 <br>
 
-    kernel_cmdline="root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet"
+    kernel_cmdline="root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet splash"
 <br>
 
     nano /etc/dracut.conf.d/i18n.conf
