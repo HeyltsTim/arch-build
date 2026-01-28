@@ -97,7 +97,7 @@
 
     hostonly="yes"
     compress="zstd"
-    add_dracutmodules+=" tpm2-tts crypt plymouth bluetooth "
+    add_dracutmodules+=" tpm2-tss crypt plymouth bluetooth "
 <br>
 
     blkid -s UUID -o value /dev/sdXX   # Your btrfs partition UUID
