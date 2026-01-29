@@ -1,21 +1,26 @@
 # arch-build
-
+## Overview
+This walkthrough is for setting up a standard EFI boot machine. It does not include any raid or disk encryption. We will be setting up btrfs subvolumes with snapshot backups and a swapfile instead of the usual swap partition (they are virtualy the same but a swapfile is much easier to modify incase you wish to change something). Setup only includes the base system without a desktop enviornment.
 ## setup FS
+> First find your connected storage devices with `lsblk -df`, take a photo (or screenshot, if your using a VM) for future refrence.
+> Then find the one you want to partition with `udevadm info /dev/<device>` this tells you the devices model info.
 
-### Use cfdisk for easy partitioning
-
+    cfdisk /dev/<drive>
+<br>
 > create a boot partition of 1G
     
-    mkfs.fat -F32 /dev/sdX
+    mkfs.fat -F32 /dev/<drive>
 <br>
 
     mkfs.btrfs -L <lable> -f -M --csum sha256 -O quota /dev/sdX
 <br>
 
-    mount /dev/sdXX /mnt
+    mount /dev/<drive> /mnt
 <br>
 
-    btrfs subvolume create /mnt/@ # This is the root subvol
+> Creates the root subvol
+
+    btrfs subvolume create /mnt/@
 <br>
 
     btrfs subvolume create /mnt/@home
