@@ -1,43 +1,45 @@
 # arch-build
 ## Overview
-This walkthrough is for setting up a standard EFI boot machine. It does not include any raid or disk encryption. We will be setting up btrfs subvolumes with snapshot backups and a swapfile instead of the usual swap partition (they are virtualy the same but a swapfile is much easier to modify incase you wish to change something). Setup only includes the base system without a desktop enviornment.
+This walkthrough is for setting up a standard EFI boot machine. It does not include any raid or disk encryption. Setup includes btrfs subvolumes with snapshot backups and a swapfile instead of the usual swap partition (they are virtualy the same but a swapfile is much easier to modify incase you wish to change something). Setup only includes the base system without a desktop enviornment.
 ## setup FS
-> First find your connected storage devices with `lsblk -df`, take a photo (or screenshot, if your using a VM) for future refrence.
-> Then find the one you want to partition with `udevadm info /dev/<device>` this tells you the devices model info.
+First find your connected storage devices with `lsblk -df`, take a photo (or screenshot, if your using a VM) for future refrence.
+Then find the one you want to partition with `udevadm info /dev/<device>` this tells you the devices model info.
 
-    cfdisk /dev/<drive>
-<br>
-> create a boot partition of 1G
-    
-    mkfs.fat -F32 /dev/<drive>
-<br>
-
-    mkfs.btrfs -L <lable> -f -M --csum sha256 -O quota /dev/sdX
-<br>
-
-    mount /dev/<drive> /mnt
-<br>
-
-> Creates the root subvol
-
-    btrfs subvolume create /mnt/@
-<br>
-
-    btrfs subvolume create /mnt/@home
-<br>
-
+```
+cfdisk /dev/<drive>
+```
+> Create a partition of 1G, this will be your boot partition. Format it with the next command.
+```  
+mkfs.fat -F32 /dev/<drive>
+```
+> This formats the partition to fat32. This is not the only filesystem type you can boot from but is the easiest to work with and is the most well supported.
+```
+mkfs.btrfs -L <lable> -f -M --csum sha256 -O quota /dev/sdX
+```
+> 
+```
+mount /dev/<drive> /mnt
+```
+```
+btrfs subvolume create /mnt/@
+```
+> This is Your file system root indicated by the "`/`"
+```
+  btrfs subvolume create /mnt/@home
+```
+> Your `/home` partition. This is where all users home folders are stored with the exeption of "root" user (the system admin) of which can access all data on the machine despite who owns it. "root" owns **EVERYTHING**!
+```
     btrfs subvolume create /mnt/@log
-<br>
-
+```
+```
     btrfs subvolume create /mnt/@pkg
-<br>
-
+```
+```
     btrfs subvolume create /mnt/@swap
-<br>
-
-    btrfs subvolume create /mnt/@snapshots
-<br>
-
+```
+```
+btrfs subvolume create /mnt/@snapshots
+```
 ### Mount subvols
 
 > First unmount /mnt
