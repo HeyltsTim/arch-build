@@ -86,7 +86,7 @@ btrfs subvolume create /mnt/@snapshots
 
 ## INSTALL THE SYSTEM!
 
-    pacstrap -K /mnt base btrfs-progs sudo nano linux-zen linux-lts linux-firmare scx-scheds wireless-regdb dracut binutils elfutils networkmanager squashfs-tools systemd-ukify tpm2-tools sbsigntools cryptsetup rng-tools qrencode multipath-tools jq nvme-cli dbus-broker dbus bluez gnupg openssh plymouth tuned-ppd wireless_tools systemtap firewalld 
+    pacstrap -K /mnt base btrfs-progs amd-ucode sudo nano linux-zen linux-lts linux-firmare scx-scheds wireless-regdb dracut binutils elfutils networkmanager squashfs-tools systemd-ukify tpm2-tools sbsigntools cryptsetup rng-tools qrencode jq nvme-cli dbus-broker dbus bluez openssh plymouth tuned-ppd wireless_tools systemtap firewalld 
 <br>
 
 ### Gen Fstab!
@@ -104,6 +104,7 @@ btrfs subvolume create /mnt/@snapshots
 
     hostonly="yes"
     compress="zstd"
+    add_dracutmodules+=" tpm2-tss crypt plymouth bluetooth "
 <br>
 
     blkid -s UUID -o value /dev/sdXX   # Your btrfs partition UUID
@@ -112,7 +113,7 @@ btrfs subvolume create /mnt/@snapshots
     nano /etc/dracut.conf.d/cmdline.conf
 <br>
 
-    kernel_cmdline="root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet"
+    kernel_cmdline="root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet splash"
 <br>
 
     nano /etc/dracut.conf.d/i18n.conf
