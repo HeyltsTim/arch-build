@@ -190,6 +190,9 @@ btrfs subvolume create /mnt/@snapshots
     EDITOR=nano visudo
 <br>
 
+/etc/conf.d/rngd
+RNGD_OPTS="--rng-device=/dev/urandom
+
     exit
 <br>
 
