@@ -191,7 +191,7 @@ btrfs subvolume create /mnt/@snapshots
 <br>
 
 /etc/conf.d/rngd
-RNGD_OPTS="--rng-device=/dev/urandom
+RNGD_OPTS="--random-device=/dev/urandom"
 
     exit
 <br>
