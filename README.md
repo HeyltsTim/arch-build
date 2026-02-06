@@ -99,7 +99,7 @@ btrfs subvolume create /mnt/@snapshots
     arch-chroot -S /mnt
 <br>
 
-    nano /etc/dracut.conf.d/flags.conf
+    nano /etc/dracut.conf.d/main.conf
 <br>
 
     hostonly="yes"
@@ -140,7 +140,6 @@ btrfs subvolume create /mnt/@snapshots
     title   Linux
     linux   /vmlinuz-linux-zen
     initrd  /initramfs-linux-zen.img
-    options root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet
 <br>
 
     nano /boot/loader/entries/linux-fallback.conf
@@ -149,7 +148,6 @@ btrfs subvolume create /mnt/@snapshots
     title   Fallback (LTS)
     linux   /vmlinuz-linux-lts
     initrd  /initramfs-linux-lts-fallback.img
-    options root=UUID=<YOUR-UUID-HERE> rootfstype=btrfs rootflags=subvol=@ rw quiet
 <br>
 
     dracut -f --regenerate-all
@@ -179,7 +177,7 @@ btrfs subvolume create /mnt/@snapshots
     passwd
 <br>
 
-    useradd -m -G wheel -s /bin/bash <username>
+    useradd -m -s /bin/bash -G wheel -c “<full name(optional)>” <username>
 <br>
 
     passwd <username>
@@ -189,9 +187,6 @@ btrfs subvolume create /mnt/@snapshots
 
     EDITOR=nano visudo
 <br>
-
-/etc/conf.d/rngd
-RNGD_OPTS="--rng-device=/dev/urandom
 
     exit
 <br>
