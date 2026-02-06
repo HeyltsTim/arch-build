@@ -99,7 +99,7 @@ btrfs subvolume create /mnt/@snapshots
     arch-chroot -S /mnt
 <br>
 
-    nano /etc/dracut.conf.d/flags.conf
+    nano /etc/dracut.conf.d/main.conf
 <br>
 
     hostonly="yes"
